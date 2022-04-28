@@ -1,1 +1,4 @@
 nishinari no supoccha he youkoso
+nishinarinishinari
+youkoso 
+nishinarifureedomm
