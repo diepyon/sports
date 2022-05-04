@@ -15,7 +15,11 @@ class CreateChatRoomsTable extends Migration
     {
         Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_name');
+            $table->string('room_name')->comment('ルームの名前');
+            $table->string('location')->comment('地域');
+            $table->dateTime('event_day')->comment('希望日');
+            $table->integer('count_per')->comment('ルームにいる人数');
+            $table->foreignId('sports_id')->constrained()->onDelete('cascade')->comment('スポーツテーブルと紐づいているID');
             $table->timestamps();
         });
     }
