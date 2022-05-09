@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MapController extends Controller
 {
 public function index() //追加
     {   //大阪市役所近辺のスポッチャ及び市民体育館を近い順に取得
-        $apiKey='AIzaSyCBnfAgGj2tYm7_J1ezRucraWZqD6B4uJk';
+        $apiKey = storage_path('app/private/keys/googleplaces.php');//apiキーを記したファイル
+        $apiKey = fopen($apiKey, 'r');
+        $apiKey = fgets($apiKey);
+
         $url= 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='.$apiKey.'&location=34.6937366,135.4999782&rankby=distance&language=ja&keyword=スポッチャ|市民体育館';
         
         $json_str = file_get_contents($url); // 文字列に変換
         $json_obj = json_decode($json_str); // オブジェクトに変換
 
         $stages = $json_obj->results;
-
+        
         foreach($stages as $key => $stage){
             $photoReference = $stages[$key]->photos[0]->photo_reference;
             $placeId = $stage->place_id;
@@ -39,10 +43,10 @@ public function index() //追加
         return $stagesList;
     }
 public function readStaticJson(){
-    $url = './storage/map.json';
+
+    $url = storage_path('app/private/json/map.json');
     $json_str = file_get_contents($url); // 文字列に変換
     $json_obj = json_decode($json_str); // オブジェクトに変換    
-     
     $json_obj = array_slice($json_obj, 0, 3);
 
     dd($json_obj);

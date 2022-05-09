@@ -139,6 +139,10 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
+        //これがあるとエラーになる
+       // 'Laravel\Socialite\SocialiteServiceProvider',
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -189,6 +193,7 @@ return [
     */
 
     'aliases' => [
+        'Socialite' => 'Laravel\Socialite\Facades\Socialite', 
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
