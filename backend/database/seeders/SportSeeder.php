@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SportSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class SportSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('sports')->updateOrInsert([
+            'sports_name' => 'バスケットボール(3on3)',
+            'per' =>'6',
+        ]);
     }
 }
