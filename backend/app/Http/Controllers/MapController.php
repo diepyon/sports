@@ -43,14 +43,11 @@ public function index() //追加
         return $stagesList;
     }
 public function readStaticJson(){
-
     $url = storage_path('app/private/json/map.json');
     $json_str = file_get_contents($url); // 文字列に変換
     $json_obj = json_decode($json_str); // オブジェクトに変換    
     $json_obj = array_slice($json_obj, 0, 3);
 
-    dd($json_obj);
-
-    return $json_obj[0]->name;
+    return $json_obj;
 }
 }

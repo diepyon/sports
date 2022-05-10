@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/map', [MapController::class, 'index']);
 Route::get('/readStaticJson', [MapController::class, 'readStaticJson']);
+
+Auth::routes();
+//これでくくるとrequestがないとのエラーが出る
+//Route::prefix('login')->name('login.')->group(function() {});
+    Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
+    Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
+
+
+    Route::get('/loggedin', [LoginController::class, 'loggedin']);
+
+    Route::get('/hoge', [LoginController::class, 'hoge']);
+

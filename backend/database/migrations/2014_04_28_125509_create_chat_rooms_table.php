@@ -19,6 +19,7 @@ class CreateChatRoomsTable extends Migration
             $table->string('location')->comment('地域');
             $table->dateTime('event_day')->comment('希望日');
             $table->integer('count_per')->comment('ルームにいる人数');
+            $table->boolean('locked')->default(true)->comment('ルームが解放されているか');
             $table->foreignId('sports_id')->constrained()->onDelete('cascade')->comment('スポーツテーブルと紐づいているID');
             $table->timestamps();
         });
