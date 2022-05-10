@@ -27,4 +27,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/hoge', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('hoge');
+
+Route::get('/hoge', function () {
+    return view('hoge');
+});
