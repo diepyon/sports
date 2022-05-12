@@ -48,12 +48,12 @@ class LoginController extends Controller
      */
     public function redirectToProvider() {
         //dd('redirectToProvider発火');
-        return redirect('https://access.line.me/oauth2/v2.1/authorize?client_id=1657113440&redirect_uri=http://192.168.47.22:8080/login/line/callback&scope=openid+profile+email&response_type=code&state=PTYXTg9MCLgnTF5Y20fKvgyI98YxE7NXTzbgbOzg');
+        return redirect('https://access.line.me/oauth2/v2.1/authorize?client_id=1657113440&redirect_uri='.url('').'/login/line/callback&scope=openid+profile+email&response_type=code&state=PTYXTg9MCLgnTF5Y20fKvgyI98YxE7NXTzbgbOzg');
         //return Socialite::driver('line')->redirect();
     }
 
     public function hoge(){
-        dd(Socialite::driver('line')->stateless()->user());
+        dd('ログイン済みです。');
     }
 
     /**
@@ -81,11 +81,11 @@ class LoginController extends Controller
 
         //api化した後に返したい情報
         //ログイン済みの場合飛ばされてしまう
-        //ログイン済みの時はAuth::user()->nameでとれる
+        //ログイン済みの時はAuth::user()->nameでとれるかも?
         // dd($user->name);
 
         $this->guard()->login($user, true);//ユーザーをログイン状態にする
-        return $user;//api化したのでユーザー情報を返して終わり（jsonに変換必要？）
+        return $user;//api化したのでユーザー情報を返して終わり（jsonに変換必要←たぶんなってるんちゃう？）
 
         //api化したので下記は不要
         //return $this->sendLoginResponse($request);

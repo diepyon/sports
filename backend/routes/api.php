@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MatchingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,8 @@ Auth::routes();
     Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
     Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
 
-
     Route::get('/loggedin', [LoginController::class, 'loggedin']);
-
     Route::get('/hoge', [LoginController::class, 'hoge']);
+
+Route::get('/matching', [MatchingController::class, 'index']);//あかんかったらpostに直す
 
