@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//最終的にはAPIにしたい
+
 Auth::routes();
 Route::prefix('login')->name('login.')->group(function() {
     Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
