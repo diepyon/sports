@@ -1,5 +1,4 @@
 <?php
-$lineRedirectUri = url('').'/login/line/callback';
 
 return [
 
@@ -33,6 +32,6 @@ return [
     'line' => [    
         'client_id' => env('LINE_CLIENT_ID'),  
         'client_secret' => env('LINE_CLIENT_SECRET'),  
-        'redirect' => $lineRedirectUri,
+        'redirect' => env('LINE_REDIRECT_URI') 
     ],
 ];
