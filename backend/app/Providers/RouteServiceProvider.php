@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/api/hoge';
+    //public const HOME = '/home';
 
     /**
      * The controller namespace for the application.

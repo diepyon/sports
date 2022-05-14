@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;//ログインユーザー情報を取得したいから追記
 
+use Illuminate\Support\Str;
+
 class LoginController extends Controller
 {
     /*
@@ -47,13 +49,25 @@ class LoginController extends Controller
      * 外部サービスの認証ページへリダイレクトする。
      */
     public function redirectToProvider() {
+        return Socialite::driver('line')->redirect();
+
+        // $nonce_token = Str::random(40);
+
+        // return Socialite::driver('line')
+        //     ->setScopes(['openid', 'profile'])
+        //     ->with([
+        //         'nonce' => $nonce_token,
+        //     ])
+        //     ->redirect();
+
         //dd('redirectToProvider発火');
-        return redirect('https://access.line.me/oauth2/v2.1/authorize?client_id=1657113440&redirect_uri=http://192.168.47.22:8080/login/line/callback&scope=openid+profile+email&response_type=code&state=PTYXTg9MCLgnTF5Y20fKvgyI98YxE7NXTzbgbOzg');
+        //return redirect('https://access.line.me/oauth2/v2.1/authorize?client_id=1657113440&redirect_uri='.url('').'/login/line/callback&scope=openid+profile+email&response_type=code&state=PTYXTg9MCLgnTF5Y20fKvgyI98YxE7NXTzbgbOzg');
         //return Socialite::driver('line')->redirect();
     }
 
-    public function hoge(){
-        dd(Socialite::driver('line')->stateless()->user());
+    public function loggedin(){
+        return Socialite::driver('line')->user();
+        dd('ログイン済みです。');
     }
 
     /**
@@ -79,18 +93,10 @@ class LoginController extends Controller
             ['name' => $r_str],
         );
 
-        //api化した後に返したい情報
-        //ログイン済みの場合飛ばされてしまう
-        //ログイン済みの時はAuth::user()->nameでとれる
-        // dd($user->name);
-
-        $this->guard()->login($user, true);//ユーザーをログイン状態にする
-        return $user;//api化したのでユーザー情報を返して終わり（jsonに変換必要？）
+        //$this->guard()->login($user, true);//ログイン状態にしてしまうと再アクセス時に別ページに飛ばされるのでコメントアウト
+        return $user;//api化したのでユーザー情報を返して終わり（jsonに変換必要←たぶんなってるんちゃう？）
 
         //api化したので下記は不要
         //return $this->sendLoginResponse($request);
-    }
-    public function loggedin(){
-        dd('ログイン後のページ');
     }
 }
