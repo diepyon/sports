@@ -17,6 +17,7 @@ class CreateChatPostsTable extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained()->onDelete('cascade')->comment('ユーザーテーブルと紐づいているID');
             $table->string('post')->comment('投稿内容');
+            $table->integer('chat_rooms_id');
             $table->timestamps();
         });
     }
