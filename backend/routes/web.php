@@ -16,18 +16,14 @@ use App\Http\Controllers\Auth\LoginController;
 
 Auth::routes();
 
-Route::group(['middleware' => ['api', 'cors']], function(){
-    Route::prefix('login')->name('login.')->group(function() {
-        Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
-        Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
-    });
-});    
+Route::prefix('login')->name('login.')->group(function() {
+    Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
+    Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
+});  
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

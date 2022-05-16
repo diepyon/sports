@@ -13,7 +13,7 @@ class MapController extends Controller
             $apiKey = fopen($apiKey, 'r');
             $apiKey = fgets($apiKey);
 
-            $url= 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='.$apiKey.'&location=34.6937366,135.4999782&rankby=distance&language=ja&keyword=スポッチャ|市民体育館';
+            $url= 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='.$apiKey.'&location=34.6937366,135.4999782&rankby=distance&language=ja&keyword=スポッチャ';
             
             $json_str = file_get_contents($url); // 文字列に変換
             $json_obj = json_decode($json_str); // オブジェクトに変換
@@ -25,7 +25,7 @@ class MapController extends Controller
                 $placeId = $stage->place_id;
 
                 //営業時間
-                $iroiro = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/place/details/json?place_id='.$placeId.'&key='.$apiKey.'&fields=formatted_phone_number,opening_hours,website,business_status&language=ja'))->result;
+                $opentime = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/place/details/json?place_id='.$placeId.'&key='.$apiKey.'&fields=formatted_phone_number,opening_hours,website,business_status&language=ja'))->result;
 
                 $stagesList[$key] = array(
                     'name' => $stages[$key]->name,
@@ -34,12 +34,12 @@ class MapController extends Controller
                     //画像は一旦仮の画像を表示（何回読み込むとお金取られるら）
                     //'image'=>'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='.$photoReference.'&key='.$apiKey,
                     'image'=>'https://cdn.img-asp.jp/cms/176006_2_718_1400_1.jpg?t=1567676890',
-                    'time'=> $iroiro->opening_hours->weekday_text,
-                    'website'=>$iroiro->website,
-                    'phoneNumber'=>$iroiro->formatted_phone_number,
+                    'time'=> $opentime->opening_hours->weekday_text,
+                    'website'=>$opentime->website,
+                    'phoneNumber'=>$opentime->formatted_phone_number,
                 );
             }
-            //毎回読み込んでるとお金がかかりそうなので静的ファイルに保存したい    
+            //毎回読み込んでるとお金がかかりそうなので静的ファイルに保存したい   
             return $stagesList;
         }
     public function readStaticJson(){
@@ -47,7 +47,6 @@ class MapController extends Controller
         $json_str = file_get_contents($url); // 文字列に変換
         $json_obj = json_decode($json_str); // オブジェクトに変換    
         $json_obj = array_slice($json_obj, 0, 3);
-        
         return $json_obj;
     }
 }

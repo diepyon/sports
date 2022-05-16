@@ -12,17 +12,20 @@ class ChatController extends Controller
         //チャットルームに所属するユーザーたちの情報
         $users = DB::table('users')->where('chat_rooms_id',$chat_rooms_id )->get();
         
-
         //チャットが解放されているかどうか
         $locked =  DB::table('chat_rooms')->where('id',$chat_rooms_id )->first()->locked;
 
         //このチャットルームに所属するユーザーたちの発言
-        $post = DB::table('chat_posts')->where('chat_rooms_id',$chat_rooms_id)->get();//テーブルにルーム情報がないので絞り込み不可
+        $posts = DB::table('chat_posts')->where('chat_rooms_id',$chat_rooms_id)->get();
 
+        foreach($posts as $post){
+            $post->user_name = DB::table('users')->where('id',$post->users_id)->first()->name;
+        }
+   
         $info = array(
             'users' => $users,
             'locked' => $locked,
-            'post' => $post,
+            'post' => $posts,
         );
        return $info;
     }
