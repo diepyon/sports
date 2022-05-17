@@ -31,7 +31,6 @@ Route::group(['middleware' => ['api', 'cors']], function(){  });
     Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
     Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
 
-
 Auth::routes();
 
 Route::get('/loggedin', [LoginController::class, 'loggedin']);
