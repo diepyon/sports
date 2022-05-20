@@ -21,7 +21,7 @@ class ChatController extends Controller
         $chat_name = DB::table('chat_rooms')->where('id',$chat_rooms_id )->first()->room_name;
 
         foreach($posts as $post){
-            $post->user_name = DB::table('users')->where('id',$post->id)->first()->name;
+            $post->user_name = DB::table('users')->where('id',$post->users_id)->first()->name;
         }
    
         $info = array(
