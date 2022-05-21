@@ -48,9 +48,6 @@ class MatchingController extends Controller
             //chatroomsテーブル内より希望条件にマッチした部屋のidを取得し、
             //usersテーブルにおける投稿者のchat_rooms_idカラムに格納
             $userRecord->update(['chat_rooms_id'=> $roomRecord->id]);
-
-            //chatroomsテーブルにおけるcount_parが、最終的にそれに紐づくスポーツの既定人数と等しけば
-            //chatroomsのlockedをfalseにする
   
             $CurrentNumberOfPeople = $roomRecord->count_per;//現在条件がマッチしたルームにいる人数
             $RequiredNumerOfPeople = $sportsRecord->first()->per;//該当スポーツの必要人数

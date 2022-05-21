@@ -35,7 +35,7 @@ Auth::routes();
 
 Route::get('/loggedin', [LoginController::class, 'loggedin']);
 
-Route::get('/matching', [MatchingController::class, 'index']);//あかんかったらpostに直す
+Route::get('/matching', [MatchingController::class, 'index']);
 
-Route::get('/getchat', [ChatController::class, 'index']);//chatのIDを受け取り、該当チャットの情報をリターン
+Route::get('/getchat', [ChatController::class, 'index']);
 Route::get('/postchat', [ChatController::class, 'post']);

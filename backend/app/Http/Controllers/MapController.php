@@ -30,16 +30,12 @@ class MapController extends Controller
                 $stagesList[$key] = array(
                     'name' => $stages[$key]->name,
                     'address' => $stages[$key]->vicinity,
-
-                    //画像は一旦仮の画像を表示（何回読み込むとお金取られるら）
-                    //'image'=>'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='.$photoReference.'&key='.$apiKey,
-                    'image'=>'https://cdn.img-asp.jp/cms/176006_2_718_1400_1.jpg?t=1567676890',
+                    'image'=>'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='.$photoReference.'&key='.$apiKey,
                     'time'=> $opentime->opening_hours->weekday_text,
                     'website'=>$opentime->website,
                     'phoneNumber'=>$opentime->formatted_phone_number,
                 );
-            }
-            //毎回読み込んでるとお金がかかりそうなので静的ファイルに保存したい   
+            } 
             return $stagesList;
         }
     public function readStaticJson(){
