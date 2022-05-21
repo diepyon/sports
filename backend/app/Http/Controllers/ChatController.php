@@ -18,11 +18,14 @@ class ChatController extends Controller
         //このチャットルームに所属するユーザーたちの発言
         $posts = DB::table('chat_posts')->where('chat_rooms_id',$chat_rooms_id)->get();
 
+        $chat_name = DB::table('chat_rooms')->where('id',$chat_rooms_id )->first()->room_name;
+
         foreach($posts as $post){
             $post->user_name = DB::table('users')->where('id',$post->users_id)->first()->name;
         }
    
         $info = array(
+            'room_name' => $chat_name,
             'users' => $users,
             'locked' => $locked,
             'post' => $posts,

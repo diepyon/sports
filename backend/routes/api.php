@@ -31,12 +31,11 @@ Route::group(['middleware' => ['api', 'cors']], function(){  });
     Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
     Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
 
-
 Auth::routes();
 
 Route::get('/loggedin', [LoginController::class, 'loggedin']);
 
-Route::get('/matching', [MatchingController::class, 'index']);//あかんかったらpostに直す
+Route::get('/matching', [MatchingController::class, 'index']);
 
-Route::get('/getchat', [ChatController::class, 'index']);//chatのIDを受け取り、該当チャットの情報をリターン
+Route::get('/getchat', [ChatController::class, 'index']);
 Route::get('/postchat', [ChatController::class, 'post']);

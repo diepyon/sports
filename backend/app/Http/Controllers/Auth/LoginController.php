@@ -50,19 +50,6 @@ class LoginController extends Controller
      */
     public function redirectToProvider() {
         return Socialite::driver('line')->redirect();
-
-        // $nonce_token = Str::random(40);
-
-        // return Socialite::driver('line')
-        //     ->setScopes(['openid', 'profile'])
-        //     ->with([
-        //         'nonce' => $nonce_token,
-        //     ])
-        //     ->redirect();
-
-        //dd('redirectToProvider発火');
-        //return redirect('https://access.line.me/oauth2/v2.1/authorize?client_id=1657113440&redirect_uri='.url('').'/login/line/callback&scope=openid+profile+email&response_type=code&state=PTYXTg9MCLgnTF5Y20fKvgyI98YxE7NXTzbgbOzg');
-        //return Socialite::driver('line')->redirect();
     }
 
     public function loggedin(){
@@ -93,10 +80,6 @@ class LoginController extends Controller
             ['name' => $r_str],
         );
 
-        //$this->guard()->login($user, true);//ログイン状態にしてしまうと再アクセス時に別ページに飛ばされるのでコメントアウト
         return $user;//api化したのでユーザー情報を返して終わり（jsonに変換必要←たぶんなってるんちゃう？）
-
-        //api化したので下記は不要
-        //return $this->sendLoginResponse($request);
     }
 }
